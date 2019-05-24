@@ -3,6 +3,10 @@ package org.launchcode.techjobs.console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Created by LaunchCode
@@ -61,7 +65,7 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -111,6 +115,36 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+
+        //ArrayList<HashMap<String,String>> jobs = JobData.findAll();
+
+        Iterator<HashMap<String,String>> i = someJobs.iterator();
+
+        if (i.hasNext() == false) {
+            System.out.println("No results");
+        }
+
+        while (i.hasNext()) {
+
+            HashMap<String,String> current = i.next();
+
+            Set<Map.Entry<String,String>> entrySet = current.entrySet();
+
+            for (Map.Entry<String,String> entry : entrySet) {
+                System.out.println(entry.getKey() + " = " + entry.getValue());
+
+            }
+
+            System.out.println("***");
+
+//            Iterator<Entry<String, String>> it = i.entrySet().iterator();
+//            while (it.hasNext()) {
+//                Entry<String, String> pair = it.next();
+//                System.out.println(pair.getKey() + " = " + pair.getValue());
+//            }
+        }
+
+
+
     }
 }
